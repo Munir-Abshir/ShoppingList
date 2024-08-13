@@ -2,7 +2,7 @@ const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
 const PORT = process.env.PORT || 5001;
-const shoppingRouter = require('./modules/shopping.router')
+const router = require('../server/modules/shopping.router')
 
 /** ---------- MIDDLEWARE ---------- **/
 app.use(bodyParser.json()); // needed for axios requests
@@ -11,7 +11,7 @@ app.use(express.static('build'));
 /** ---------- EXPRESS ROUTES ---------- **/
 // Create your API routes in a separate file
 // and plug them in here with `app.use()`
-app.use('/api/shopping', shoppingRouter);
+app.use('/api/shopping', router);
 
 /** ---------- START SERVER ---------- **/
 app.listen(PORT,  () => {

@@ -1,9 +1,9 @@
-import React from 'react';
 // import {useState} from 'react';
 import { useEffect, useState } from 'react';
-// import Header from '../Header/Header.jsx'
-import './App.css';
+// We can import axios now!
+// No more yellow squiggles!!!
 import axios from 'axios';
+
 
 
 
@@ -39,9 +39,9 @@ function App() {
       
       
               const newItem = {
-                name: setNewName,
-                quanity: setNewQuanity,
-                unit: setNewUnit
+                name: name,
+                quanity: quanity,
+                unit: unit
               }
       
       
@@ -70,18 +70,18 @@ function App() {
               <label htmlFor="name">name:</label>
       
       
-              <input id="name" onChange={(event) => setNewName(event.target.value)} value={newItem} />
+              <input id="name" onChange={(event) => setNewName(event.target.value)} value={name} />
       
 
               <label htmlFor="quanity">quanity:</label>
-              <input id="quanity" onChange={(event) => setNewQuanity(event.target.value)} value={newItem} />
+              <input id="quanity" onChange={(event) => setNewQuanity(event.target.value)} value={quanity} />
 
 
 
 
 
               <label htmlFor="unit">unit:</label>
-              <input id="unit" onChange={(event) => setNewUnit(event.target.value)} value={newItem} />
+              <input id="unit" onChange={(event) => setNewUnit(event.target.value)} value={unit} />
       
               <button type="submit">Add New Items</button>
             </form>
