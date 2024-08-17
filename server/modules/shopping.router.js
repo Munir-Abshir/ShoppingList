@@ -42,12 +42,10 @@ router.post('/',(req,res) => {
 // PUT
 
 
-router.put('/id:', (req,res) => {
-    let id = req.params.id;
-    let task = req.body.quanity;
-
-    const queryText = 'UPDATE "Shopping" set "quanity" = $1 WHERE "id" = $2;';
-    pool.query(queryText, [quanity])
+router.put('/toggle/:id', (req,res) => {
+    let {id} = req.params;
+    const queryText = 'UPDATE "Shopping" set "purchase" = NOT "purchase" WHERE "id" = $1;';
+    pool.query(queryText, [id])
     .then(result => {
         res.sendStatus(200);
     })
@@ -77,4 +75,23 @@ router.delete('/:id',(req,res) => {
      })
 
  })
+
+
+
+ router.delete('/:id',(req,res) => {
+    const deleateRow = req.params;
+    const queryText = ' Delete from "Shopping" WHERE id > 0;';
+    pool.query(queryText, [deleateRow]) 
+        .then(response => {
+            console.log('id with deletwd ', response);
+            res.sendStatus(200);
+            // console.log()
+        })
+        .catch(error => {
+            console.log("error", error);
+            res.sendStatus(500);
+   
+        })
+   
+    })
 module.exports = router;

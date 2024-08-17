@@ -61,39 +61,82 @@ function App() {
                   console.log(error);
                 })
             }
+
+            function deleteID(id) {
+              axios.delete(`/api/shopping/${id}`)
+              .then(response => {
+                console.log('DELTE call successful!');
+                fetchNew();
+              })
+              .catch(error => {
+                console.log('something went wrong with our DELTE call');
+              })
+          
+              
+              }
+
+              function Changer(id) {
+                axios.put(`/api/shopping/toggle/${id}`)
+                .then(response => {
+                  console.log('put call successful!');
+                  fetchNew();
+                  
+                })
+                .catch(error => {
+                  console.log('something went wrong with our put call');
+                })
+            
+                
+                }
+
+                function resetData() {
+                ShoppingList.map( item => {
+                  axios.delete(`/api/shopping/${item.id}`)
+                  .then(() => {
+                    SetNewShoppingList([]);
+                    
+                  })
+                  .catch(error => {
+                    console.log('something went wrong with our DELTE call');
+                  })})}
+               
+
         return (
           <div>
         
             <h1>Shopping List</h1>
           <form onSubmit={addItem}>
       
-              <label htmlFor="name">name:</label>
+              <label htmlFor="name">Name:</label>
       
       
               <input id="name" onChange={(event) => setNewName(event.target.value)} value={name} />
       
 
-              <label htmlFor="quanity">quanity:</label>
+              <label htmlFor="quanity">Quanity:</label>
               <input id="quanity" onChange={(event) => setNewQuanity(event.target.value)} value={quanity} />
 
 
 
 
 
-              <label htmlFor="unit">unit:</label>
+              <label htmlFor="unit">Unit:</label>
               <input id="unit" onChange={(event) => setNewUnit(event.target.value)} value={unit} />
       
               <button type="submit">Add New Items</button>
+              <br />
+              <button classname="Reset"  onClick={() => {resetData()}}>reset</button>
+
             </form>
       
-            <ul>
+            {/* <ul> */}
               {ShoppingList.map(
                 function (groceries) {
       
-                  return (<li key={groceries.id}>{groceries.name} amount: {groceries.quanity}{groceries.unit}</li>);
+                  return (<p key={groceries.id} className={groceries.purchase ? "True" : "False"} >{groceries.name} <br />  {groceries.quanity}  {groceries.unit} <br/> <button className={groceries.purchase ? "Bought" : "notBought"} onClick={() => Changer(groceries.id)}>buy</button> <button className={groceries.purchase ? "Boughtt" : "NotBoughtt"} onClick={() => deleteID(groceries.id)}>🗑️</button>  </p>);
                 }
               )}
-            </ul>
+            {/* </ul> */}
           </div>
       
         );
