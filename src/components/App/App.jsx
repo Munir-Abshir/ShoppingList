@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 // We can import axios now!
 // No more yellow squiggles!!!
 import axios from 'axios';
+import ResetButton from '../ResetButton/ResetButton';
 
 
 
@@ -137,6 +138,8 @@ function App() {
                 }
               )}
             {/* </ul> */}
+
+            <ResetButton />
           </div>
       
         );
